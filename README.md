@@ -2,14 +2,13 @@
 
 My individual coding project.  
 Currently hosted on Netlify:  
-https://game-with-computer-1-100.netlify.app/
+https://my-weather-app-104.netlify.app/
 
 ## File structure
 script.js - the main logic file  
-index.html - main html file - to play the game, open this file on browser window  
+index.html - main html file - to use the app, open this file on browser window  
 style.css - main styling file  
 favicon.ico - icon to be displayed on browser tab  
-'eyes' folder - SVG files which create animation effect  
 
 ## About the game
 Created by Ekaterina Tereshko as an individual project during the coding program, it has the following features:
