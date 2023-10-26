@@ -22,8 +22,8 @@ function enter(e) {
     }
 }
 
-async function getInfo (data) {
-    const res = await fetch(`${api.endpoint}weather?q=${data}&units=metric&appID=${api.key}`);
+async function getInfo (city) {
+    const res = await fetch(`${api.endpoint}weather?q=${city}&units=metric&appID=${api.key}`);
     const result = await res.json();
     displayResult(result);
 }
@@ -39,6 +39,9 @@ function displayResult(result){
 
     let feelsLike = document.querySelector("#feelsLike");
     feelsLike.innerHTML = `<span>Feels like: </span>${Math.round(result.main.feels_like)}<span>°</span>`;
+
+    let icon = document.querySelector("#icon");
+    icon.innerHTML = `<img src="https://openweathermap.org/img/wn/${result.weather[0]['icon']}@2x.png">`
 
     let cond = document.querySelector("#conditions");
     cond.textContent = `${result.weather[0].main}`
