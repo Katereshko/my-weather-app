@@ -30,17 +30,39 @@ So, the **myKey** const contains the user's unique API key for the abstractapi.c
 After the page is loaded, the **getIP()** async function is called. It helps to receive the info about the user's city using API provided by the website https://abstractapi.com.  
 
 This function works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server is used as a parameter and it also contains the **myKey** const as a part of URL).     
-Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. After that the **getInfo()** function is called with the parameter "result.city" which means the value of _city_ key of the object inside the **result**.  
+Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. After that the **getInfo()** function is called with the parameter _"result.city"_ which means the value of _city_ key of the object inside the **result**.  
 
 As the user might enter the city name in the input field, there is also an event handler _addEventListener()_ set on the Enter key so that the value of the user's input is used as a parameter in the **getInfo()** function instead of the city defined by default based on the user's IP.
-
-const input = document.querySelector("#input");
-input.addEventListener("keypress", enter);  
 
 async function getInfo (city) {
     const res = await fetch(`${api.endpoint}weather?q=${city}&units=metric&appID=${api.key}`);
     const result = await res.json();
     displayResult(result);
+
+The **getInfo()** async function also works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server, **api.endpoint**, in combination with the user's key, **api.key**, is used as a parameter).     
+Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. This object contains all possible data about the current weather in the city. After that the **displayResult()** function with the parameter _"result"_ is called which is responsible for user-friendly display of the received weather data.  
+
+function displayResult(result){
+    let city = document.querySelector("#city");
+    city.textContent = `${result.name}, ${result.sys.country}`;
+
+    getOurDate();
+
+    let temp = document.querySelector("#temperature");
+    temp.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
+
+    let feelsLike = document.querySelector("#feelsLike");
+    feelsLike.innerHTML = `<span>Feels like: </span>${Math.round(result.main.feels_like)}<span>°</span>`;
+
+    let icon = document.querySelector("#icon");
+    icon.innerHTML = `<img src="https://openweathermap.org/img/wn/${result.weather[0]['icon']}@2x.png">`
+
+    let cond = document.querySelector("#conditions");
+    cond.textContent = `${result.weather[0].main}`
+
+    let minmax = document.querySelector("#variation");
+    minmax.innerHTML = `<span>Min: </span>${Math.round(result.main.temp_min)}<span>° </span><span>Max: </span>${Math.round(result.main.temp_max)}<span>°</span>`
+}
 
 
 **Thanks for your time exploring my project!**
