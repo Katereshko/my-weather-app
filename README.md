@@ -15,17 +15,31 @@ Created by Ekaterina Tereshko as an individual project during the coding program
 
 ### Tools used:  
 - API provided by the websites https://abstractapi.com (for IP) and https://api.openweathermap.org (for weather data);
-- The Fetch API which provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. The fetch() method is used in this app to request data from a server of the website that provides weather data. This method requires one parameter, the URL to request, and returns a promise.
+- The Fetch API which provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. The fetch() method is used in this app to request data from a server of the website that provides weather data. This method requires a parameter, the URL to request, and returns a promise.
 
 ### User side:  
 - open the app and make sure your Internet connection is good as it is needed for the app to work correctly  
 - the app will define your current city using your IP and show the weather in your city  
 - in case the city is not defined or in case you need to find the weather in another city, type its name in the search box and press the Enter key
 
-### Logic side
+### Logic side  
 
-For two games logic is similar and is described in two blocks, one for each of two games that the user can choose from.  
-All the constants and functions are named accordingly in both games with a difference in number 1 or 2 only in the end of the name.  
+In order to make the use of URL and API keys more convenient, they are initially defined.
+So, the **myKey** const contains the API key for the abstractapi.com website, and the **api** object contains such properties as **endpoint** (URL for the openweathermap.org website's API) and **key** (the individual user's key for this API).
+
+After the page is loaded, the **getIP()** async function is called and helps to receive the info about the user's city using API provided by the website https://abstractapi.com.  
+This function works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server is used as a parameter and it also contains the **myKey** const as a part of URL, the key is personal for a certain user and is received by user once the user is signed up).     
+Once the body is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. After that the **getInfo()** function is called with the parameter "result.city" which means the value of _city_ key of the object inside the **result**.  
+
+
+
+const api = {
+    endpoint: "https://api.openweathermap.org/data/2.5/",
+    key: "e4bf831c5d1b7898383c04a744ab0119"
+}
+
+const input = document.querySelector("#input");
+input.addEventListener("keypress", enter);
 
 The constants represent the following items (an example for game 1):   
 ***input1*** - an input field where the user should enter the suggested number for the first game,   
