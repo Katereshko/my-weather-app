@@ -10,17 +10,17 @@ index.html - main html file - to use the app, open this file on browser window
 style.css - main styling file  
 favicon.ico - icon to be displayed on browser tab  
 
-## About the game
+## About the app
 Created by Ekaterina Tereshko as an individual project during the coding program, it has the following features:
 
-### Game over when:
-- user wins by guessing the randomly picked number from 1 to 20 (game one) or from 1 to 100 (game two)
-- user decides to start another game (of 2) without finishing the previous one
+### Tools used:  
+- API provided by the websites https://ipgeolocation.abstractapi.com (for IP) and https://api.openweathermap.org (for weather data);
+- The Fetch API which provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. The fetch() method is used in this app to request data from a server of the website that provides weather data. This method requires one parameter, the URL to request, and returns a promise.
 
-### User side
-- pick one of the two games by typing a number in the input field
-- use alerts that will give you hints
-- continue guessing and using hints until you guess the number picked by computer
+### User side:  
+- open the app and make sure your Internet connection is good as it is needed for the app to work correctly  
+- the app will define your current city using your IP and show the weather in your city  
+- in case the city is not defined or in case you need to find the weather in another city, type its name in the search box and press the Enter key
 
 ### Logic side
 
