@@ -14,7 +14,7 @@ favicon.ico - icon to be displayed on browser tab
 Created by Ekaterina Tereshko as an individual project during the coding program, it has the following features:
 
 ### Tools used:  
-- API provided by the websites https://ipgeolocation.abstractapi.com (for IP) and https://api.openweathermap.org (for weather data);
+- API provided by the websites https://abstractapi.com (for IP) and https://api.openweathermap.org (for weather data);
 - The Fetch API which provides a JavaScript interface for accessing and manipulating parts of the protocol, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network. The fetch() method is used in this app to request data from a server of the website that provides weather data. This method requires one parameter, the URL to request, and returns a promise.
 
 ### User side:  
