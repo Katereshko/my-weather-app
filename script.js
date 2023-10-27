@@ -66,7 +66,6 @@ function getOurDate(){
     let dateOnScreen = document.querySelector("#date");
     dateOnScreen.textContent = `${day}` + " " + `${date}` + " " + `${month}` + " " + `${year}`;
 
-
 }
 
 
