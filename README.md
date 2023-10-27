@@ -32,15 +32,12 @@ After the page is loaded, the **getIP()** async function is called. It helps to 
 This function works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server is used as a parameter and it also contains the **myKey** const as a part of URL).     
 Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. After that the **getInfo()** function is called with the parameter _"result.city"_ which means the value of _city_ key of the object inside the **result**.  
 
-As the user might enter the city name in the input field, there is also an event handler _addEventListener()_ set on the Enter key so that the value of the user's input is used as a parameter in the **getInfo()** function instead of the city defined by default based on the user's IP.
-
-async function getInfo (city) {
-    const res = await fetch(`${api.endpoint}weather?q=${city}&units=metric&appID=${api.key}`);
-    const result = await res.json();
-    displayResult(result);
+As the user might enter any city name in the input field, there is also an event handler _addEventListener()_ set on the Enter key so that the value of the user's input is used as a parameter in the **getInfo()** function instead of the city defined by default based on the user's IP.
 
 The **getInfo()** async function also works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server, **api.endpoint**, in combination with the user's key, **api.key**, is used as a parameter).     
 Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. This object contains all possible data about the current weather in the city. After that the **displayResult()** function with the parameter _"result"_ is called which is responsible for user-friendly display of the received weather data.  
+
+In the **displayResult()** function variables are declared which now contain relevant elements selected using _querySelector()_. In this app the following features are set, although the API provides much more data that can also be used (check the "Possibilities" ssection). In order to add more elements that can be displayed on the page, add them inside the **displayResult(result)** function: add a variable for each data type you want to display (like humidity, presuure, etc.) and check the object that is placed into **result** const after the **getInfo()** async function is called. For example, to add humidity data to the page, take the following steps:
 
 function displayResult(result){
     let city = document.querySelector("#city");
@@ -62,8 +59,37 @@ function displayResult(result){
 
     let minmax = document.querySelector("#variation");
     minmax.innerHTML = `<span>Min: </span>${Math.round(result.main.temp_min)}<span>° </span><span>Max: </span>${Math.round(result.main.temp_max)}<span>°</span>`
-}
+}  
 
+### Customization possibilities
+
+In order to add more elements that can be displayed on the page, add them to HTML code in the **index.html** file and to the **displayResult()** function in the **script.js** file: add an HTML element and a variable for each data type you want to display (like humidity, presuure, etc.). Check the object that is placed into **result** const after the **getInfo()** async function is called so that you know what the appropriate property is called.  
+
+For example, to add humidity data to the page, you take the following steps:  
+1. Add an element to the **index.html** file, make sure it has and id so that you can select it later:
+
+<img width="385" alt="Снимок экрана 2023-10-27 в 11 46 05" src="https://github.com/Katereshko/my-weather-app/assets/70511658/c777a858-5727-48bf-af0a-9eb791a94b11">   
+
+`<p id="humidity">87</p>`  
+
+(add a number to HTML as an example so that it is displayed to the user while the actual data is loading)  
+
+2. Using console, check the **result** value received after the **getInfo()** function works:
+
+`console.log(result)`  
+
+<img width="483" alt="Снимок экрана 2023-10-27 в 11 54 33" src="https://github.com/Katereshko/my-weather-app/assets/70511658/cbd7d560-7fb0-42cd-aefe-987f9f9bc5c7">  
+
+3. Find the humidity data in this object and copy its key name: the full name is "main.humidity"  
+
+<img width="184" alt="Снимок экрана 2023-10-27 в 11 56 03" src="https://github.com/Katereshko/my-weather-app/assets/70511658/a2fba3f5-0b7f-47c4-bf75-fc3ca54484a5">  
+
+4. Add the following code to the **script.js** file inside the **displayResult()** function:  
+
+`let humidity = document.querySelector("#humidity");`     
+``humidity.textContent = `${result.main.humidity}`; ``  
+
+After these steps the humidity actual data will be displayed right in the place where it is placed within the HTML markdown. You can also add style to the existing or new data sections using their id (#) and adding new features to the **style.css** file.
 
 **Thanks for your time exploring my project!**
 
