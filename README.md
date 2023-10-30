@@ -24,7 +24,7 @@ Created by Ekaterina Tereshko as an individual project during the coding program
 
 ### Logic side  
 
-In order to make the use of URL and API keys more convenient, they are initially defined.
+In order to make the use of URL and API keys more convenient, they are initially defined in the constants.
 So, the **myKey** const contains the user's unique API key for the abstractapi.com website, and the **api** object contains such properties as **endpoint** (URL for the openweathermap.org website's API) and **key** (the individual user's key for this API which is received by user once the user is signed up).
 
 After the page is loaded, the **getIP()** async function is called. It helps to receive the info about the user's city using API provided by the website https://abstractapi.com.  
