@@ -34,33 +34,17 @@ Once the body of the Response is fully loaded, the **res** gets converted to jso
 
 As the user might enter any city name in the input field, there is also an event handler _addEventListener()_ set on the Enter key so that the value of the user's input is used as a parameter in the **getInfo()** function instead of the city defined by default based on the user's IP.
 
-The **getInfo()** async function also works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server, **api.endpoint**, in combination with the user's key, **api.key**, is used as a parameter).     
+The **getInfo()** async function also works two-stage: first it uses _fetch()_ method which returns a Response object and places it into the **res** const (the URL of the API-providing server (**api.endpoint**), in combination with the user's key (**api.key**), is used as a parameter).     
 Once the body of the Response is fully loaded, the **res** gets converted to json using the _.json()_ method and gets placed into the **result** const. This object contains all possible data about the current weather in the city. After that the **displayResult()** function with the parameter _"result"_ is called which is responsible for user-friendly display of the received weather data.  
 
-In the **displayResult()** function variables are declared which now contain relevant elements selected using _querySelector()_. In this app the following features are set, although the API provides much more data that can also be used (check the "Сustomization possibilities" section).  
+In the **displayResult()** function variables are declared which now contain relevant page elements selected using _querySelector()_. In this app the following features are set, although the API provides much more data that can also be used (check the "Сustomization possibilities" section): _city_, _temperature_, _feels like_, _icon_, _conditions_, _min and max temperature_.  
 
-function displayResult(result){
-    let city = document.querySelector("#city");
-    city.textContent = `${result.name}, ${result.sys.country}`;
+For each element the value from **result** is displayed on the page using _textContent_ and _innerHTML_.  
+Also, the **getOurDate()** function is called inside the **displayResult()** function.  
+It defines the current user's full date and takes the day name, date, month and year from it.  
+Then it handles with the page element with the "#date" id, puts it into the **dateOnScreen** variable and makes the date to be displayed on the page in the relevant element using _textContent_.  
 
-    getOurDate();
-
-    let temp = document.querySelector("#temperature");
-    temp.innerHTML = `${Math.round(result.main.temp)}<span>°</span>`;
-
-    let feelsLike = document.querySelector("#feelsLike");
-    feelsLike.innerHTML = `<span>Feels like: </span>${Math.round(result.main.feels_like)}<span>°</span>`;
-
-    let icon = document.querySelector("#icon");
-    icon.innerHTML = `<img src="https://openweathermap.org/img/wn/${result.weather[0]['icon']}@2x.png">`
-
-    let cond = document.querySelector("#conditions");
-    cond.textContent = `${result.weather[0].main}`
-
-    let minmax = document.querySelector("#variation");
-    minmax.innerHTML = `<span>Min: </span>${Math.round(result.main.temp_min)}<span>° </span><span>Max: </span>${Math.round(result.main.temp_max)}<span>°</span>`
-}  
-
+}
 ### Customization possibilities
 
 In order to add more elements that can be displayed on the page, add them to HTML code in the **index.html** file and to the **displayResult()** function in the **script.js** file: add an HTML element and a variable for each data type you want to display (like humidity, presuure, etc.). Check the object that is placed into **result** const after the **getInfo()** async function is called so that you know what the appropriate property is called.  
