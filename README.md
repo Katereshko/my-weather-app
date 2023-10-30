@@ -25,7 +25,7 @@ Created by Ekaterina Tereshko as an individual project during the coding program
 ### Logic side  
 
 In order to make the use of URL and API keys more convenient, they are initially defined in the constants.
-So, the **myKey** const contains the user's unique API key for the abstractapi.com website, and the **api** object contains such properties as **endpoint** (URL for the openweathermap.org website's API) and **key** (the individual user's key for this API which is received by user once the user is signed up).
+So, the **myKey** const contains the user's unique API key for the abstractapi.com website, and the **api** object contains such properties as **endpoint** (URL for the openweathermap.org website's API) and **key** (the individual - for the app's author in this case - key for this API).
 
 After the page is loaded, the **getIP()** async function is called. It helps to receive the info about the user's city using API provided by the website https://abstractapi.com.  
 
@@ -41,22 +41,21 @@ In the **displayResult()** function variables are declared which now contain rel
 
 For each element the value from **result** is displayed on the page using _textContent_ and _innerHTML_.  
 Also, the **getOurDate()** function is called inside the **displayResult()** function.  
-It defines the current user's full date and takes the day name, date, month and year from it.  
+It defines the current user's full date and takes the current day name, date, month and year from it.  
 Then it handles with the page element with the "#date" id, puts it into the **dateOnScreen** variable and makes the date to be displayed on the page in the relevant element using _textContent_.  
 
-}
 ### Customization possibilities
 
-In order to add more elements that can be displayed on the page, add them to HTML code in the **index.html** file and to the **displayResult()** function in the **script.js** file: add an HTML element and a variable for each data type you want to display (like humidity, presuure, etc.). Check the object that is placed into **result** const after the **getInfo()** async function is called so that you know what the appropriate property is called.  
+In order to add more elements that can be displayed on the page, add them to HTML code in the **index.html** file and to the **displayResult()** function in the **script.js** file: add an HTML element and a variable for each data type you want to display (like humidity, presuure, etc.). Check the object that is placed into **result** const after the **getInfo()** async function is called so that you know what the appropriate property's key is.  
 
-For example, to add humidity data to the page, you take the following steps:  
-1. Add an element to the **index.html** file, make sure it has and id so that you can select it later:
+For example, to add humidity data to the page, you need to take the following steps:  
+1. Add an element to the **index.html** file, make sure it has an id so that you can select it later:
 
 <img width="385" alt="Снимок экрана 2023-10-27 в 11 46 05" src="https://github.com/Katereshko/my-weather-app/assets/70511658/c777a858-5727-48bf-af0a-9eb791a94b11">   
 
 `<p id="humidity">87</p>`  
 
-(add a number to HTML as an example so that it is displayed to the user while the actual data is loading)  
+(add a number within the HTML tag as an example so that it is displayed to the user while the actual data is loading)  
 
 2. Using console, check the **result** value received after the **getInfo()** function works:
 
